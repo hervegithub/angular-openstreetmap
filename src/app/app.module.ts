@@ -12,13 +12,14 @@ import { MapComponent } from './map/map.component';
 import { HeaderComponent } from './header/header.component';
 
 
+
 registerLocaleData(fr);
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    HeaderComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

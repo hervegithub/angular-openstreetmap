@@ -1,42 +1,80 @@
-<nz-layout>
-    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" nzWidth="300px">
-      <div class="logo">
-        <img class="logoImg" src="../../assets/LogoVyBlanc_fondTransparent.png" width="80" height="80">
-      </div>
-      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-menu-item >
-            <i nz-icon nzType="api" nzTheme="outline" class="icons"></i>
-            <span class="menu-item-text">Développeurs</span>
-        </li>
-        <li nz-menu-item>
-            <i nz-icon nzType="user-add" nzTheme="outline" class="icons"></i>
-            <span class="menu-item-text">Devenir contributeur</span>
-        </li>
-        <li nz-menu-item>
-            <i nz-icon nzType="info" nzTheme="outline" class="icons"></i>
-            <span class="menu-item-text">A propos de nous</span>
-        </li>
-        <li nz-menu-item>
-            <i nz-icon nzType="phone" nzTheme="outline" class="icons"></i>
-            <span class="menu-item-text">Contacts</span>
-        </li>
-      </ul>
-    </nz-sider>
+           <nz-layout >
+        <nz-sider 
+          nzCollapsible
+          [(nzCollapsed)]="isCollapsed"
+          [nzBreakpoint]=""
+          [nzCollapsedWidth]="0"
+          [nzZeroTrigger]="zeroTrigger"
+        >
+          <div class="logo">
+          <img class="logoImg" src="../../assets/LogoVyBlanc_fondTransparent.png" >
+        </div>
+        <div class="form" nz-row nzType="flex" nzJustify="space-between">
+         <div nz-col [nzXs]="{ span: 22, offset: 1 }">
+          <button  nz-button nzType="primary"nzBlock >Primary</button>
+         </div>
+  
+            <div  nz-col [nzXs]="{ span: 22, offset:1}">
+              <h2 >chercher par nom</h2>
+              <hr>
+            </div>
+   
+            <div nz-col [nzXs]="{ span: 10, offset: 1 }">
+              <input nz-input placeholder="default size" type="text" id="">
+            </div>
+            <div  nz-col [nzXs]="{ span: 10 }">
+              <button nz-button nzType="primary" nzBlock >Primary</button>
+            </div>
+           
+            <div  nz-col [nzXs]="{ span: 22, offset:1}">
+              <h2 >chercher par nom</h2>
+              <hr>
+            </div>
+   
+            <!-- <div nz-col [nzXs]="{ span: 10, offset: 1 }">
+              <input nz-input placeholder="default size" type="text" id="">
+            </div> -->
+            <div nz-col [nzXs]="{ span: 10, offset: 1 }">
+            <nz-select  [(ngModel)]="selectedValue" nzAllowClear nzPlaceHolder="Choose">
+              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
+            </nz-select>
+            </div>
+             <div  nz-col [nzXs]="{ span: 10 }">
+              <button nz-button nzType="primary" nzBlock >Primary</button>
+            </div>
+           
+            
+          </div>
+        
+        
+        </nz-sider>
+
     <nz-layout>
       <nz-header>
-        <div style="display: flex; padding: 0 10px;">
+        <div style="display: flex; padding: 0 70px;">
             <nz-card *ngFor="let item of filterItems" [ngClass]="{'cardClass': item.isSelected}"
-             (click)='selectFilterItem(item.id)'>
-                <img [src]="item.image" width="50" height="50">
+             (click)='filterItems(item.id)'>
+                <img id="imgflit" [src]="item.image" width="50" height="50">
             </nz-card>
         </div>
       </nz-header>
-      <nz-content>
-        <nz-breadcrumb>
-          <nz-breadcrumb-item>User</nz-breadcrumb-item>
-          <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
-        </nz-breadcrumb>
-        <div class="inner-content" id="mapid">    
+      <nz-content >
+           
+
+
+        <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" [nzContent]="modalContent" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+          
+           <input style="width: 40px; height: 40px;" type="image" src="{{imgMar}}"> 
+          <p >{{title}}</p>
+          <p>Content three</p>
+       
+        </nz-modal>
+
+
+
+        <div  id="mapid">    
         </div>
       </nz-content>
       <nz-footer>
@@ -44,5 +82,4 @@
       </nz-footer>
     </nz-layout>
   </nz-layout>
-
   
