@@ -1,22 +1,10 @@
-.logo {
-    height: 100px;
-    margin: 10px;
-}
 
-.logoImg{
-  height: 100px;
-  width: 100px;
- margin: 40px;
-}
+
 
 nz-sider {
-  background: #e03039;
+  background: #e4572c;
   color: #fff;
-  //min-height: 60px;
-  flex-basis: 300px;
-   max-width: 300px;
-   min-width: 200px;
-   width: 300px;
+  
 }
   
 
@@ -32,7 +20,25 @@ nz-menu-item{
     padding: 0;
     height: 110px;
     padding: 10px 0;
+    
+    //position: relative;
+  
+  }
+  nz-card{
+    max-width:90px;
+    max-height: 90px;
+    border-radius: 10px;
     position: relative;
+    
+  }
+
+  #imgflit{
+    
+    max-width:50px;
+    max-height : 50px;
+    margin: 6px 6px 6px 6px;
+     position: relative;
+    // display: block;
   }
 
   nz-content {
@@ -42,18 +48,11 @@ nz-menu-item{
   }
 
   #mapid{
-    height: 570px;
+    height: 610px;
     width: 100%;
     margin-top: 20px;
+    display: inline-flex;
 }
-
-  nz-breadcrumb {
-    margin: 16px 5px;
-    font-size: 18px;
-    font-weight: bolder;
-    color: rgb(0, 0, 0);
-  }
-
 
 
   nz-footer {
@@ -62,15 +61,20 @@ nz-menu-item{
     position: relative;
   }
 
-  nz-card{
-    width:80px;
-    height: 80px;
-    margin-left: 10px;
-    border-radius: 10px;
-  }
-
   
 
+  .logoImg{
+    height: 100px;
+    width: 100px;
+    margin: 100px 100px 50px 100px;
+  }
+   h2{
+     text-align: center;
+   }
+   .reglage{
+      margin-top: 10px;
+      margin-bottom: 10px;
+   }
 
   .flex-box{
     flex-grow: 1;
@@ -106,7 +110,14 @@ nz-menu-item{
     margin-right: 8px;
     width: 100px;
   }
+  [nz-form] {
+     max-width: 400px;
+   }
   #im {
      height: 30px;
      width: 30px;
+   }
+   .stylButton{
+    background-color: rgb(221, 88, 39);
+    color: white;
    }

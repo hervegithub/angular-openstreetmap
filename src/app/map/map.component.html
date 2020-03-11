@@ -1,85 +1,195 @@
-           <nz-layout >
-        <nz-sider 
-          nzCollapsible
-          [(nzCollapsed)]="isCollapsed"
-          [nzBreakpoint]=""
-          [nzCollapsedWidth]="0"
-          [nzZeroTrigger]="zeroTrigger"
-        >
-          <div class="logo">
-          <img class="logoImg" src="../../assets/LogoVyBlanc_fondTransparent.png" >
+<nz-layout>
+  <nz-sider
+    [nzWidth]="300"
+    nzCollapsible
+    [(nzCollapsed)]="isCollapsed"
+    [nzBreakpoint]=""
+    [nzCollapsedWidth]="0"
+    [nzZeroTrigger]="zeroTrigger"
+  >
+    <div>
+      <img class="logoImg" src="../../assets/LogoVyBlanc_fondTransparent.png" />
+    </div>
+    <div class="form" >
+     
+      <!---------Reglage de partie button--------->
+
+      <div class="reglage" nz-col [nzXs]="{ span: 22, offset: 1 }" >
+        
+        <button (click)="createTplModal(tplTitle, tplContent, tplFooter)" nz-button class="stylButton"  nzBlock>Ajouter Un Lieu à :</button>
+
+          <h2>Rechercher Lieu Par Nom</h2>
+          <hr/>
+        
+         <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle">
+        <div nz-col nzXs="10" >
+          <input nz-input placeholder="Rechercher Lieu" type="text" />
         </div>
-        <div class="form" nz-row nzType="flex" nzJustify="space-between">
-         <div nz-col [nzXs]="{ span: 22, offset: 1 }">
-          <button  nz-button nzType="primary"nzBlock >Primary</button>
+        <div nz-col nzXs="10" >
+          <button nz-button class="stylButton"  nzBlock>Rechercher</button>
+        </div>
          </div>
-  
-            <div  nz-col [nzXs]="{ span: 22, offset:1}">
-              <h2 >chercher par nom</h2>
-              <hr>
-            </div>
-   
-            <div nz-col [nzXs]="{ span: 10, offset: 1 }">
-              <input nz-input placeholder="default size" type="text" id="">
-            </div>
-            <div  nz-col [nzXs]="{ span: 10 }">
-              <button nz-button nzType="primary" nzBlock >Primary</button>
-            </div>
-           
-            <div  nz-col [nzXs]="{ span: 22, offset:1}">
-              <h2 >chercher par nom</h2>
-              <hr>
-            </div>
-   
-            <!-- <div nz-col [nzXs]="{ span: 10, offset: 1 }">
-              <input nz-input placeholder="default size" type="text" id="">
-            </div> -->
-            <div nz-col [nzXs]="{ span: 10, offset: 1 }">
-            <nz-select  [(ngModel)]="selectedValue" nzAllowClear nzPlaceHolder="Choose">
-              <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
-              <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
-              <nz-option nzValue="disabled" nzLabel="Disabled" nzDisabled></nz-option>
-            </nz-select>
-            </div>
-             <div  nz-col [nzXs]="{ span: 10 }">
-              <button nz-button nzType="primary" nzBlock >Primary</button>
-            </div>
-           
-            
-          </div>
-        
-        
-        </nz-sider>
 
-    <nz-layout>
-      <nz-header>
-        <div style="display: flex; padding: 0 70px;">
-            <nz-card *ngFor="let item of filterItems" [ngClass]="{'cardClass': item.isSelected}"
-             (click)='filterItems(item.id)'>
-                <img id="imgflit" [src]="item.image" width="50" height="50">
-            </nz-card>
-        </div>
-      </nz-header>
-      <nz-content >
-           
-
-
-        <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" [nzContent]="modalContent" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <h2>Rechercher Lieu  Par Type</h2>
+        <hr />
+        <div nz-row nzType="flex" nzJustify="space-around" nzAlign="middle">
+         <div nz-col nzXs='10'>
+        <nz-select 
+          [(ngModel)]="selectedValue"
+          nzAllowClear
+          nzPlaceHolder="Choose"
+        >
+          <nz-option nzValue="cafe" nzLabel="Cafe"></nz-option>
+          <nz-option nzValue="pharmacie" nzLabel="Pharmacie"></nz-option>
+          <nz-option nzValue="monument historique" nzLabel="Monument historique"></nz-option>
+          <nz-option nzValue="africa" nzLabel="Africa"></nz-option>
+          <nz-option nzValue="hotel" nzLabel="Hotel"></nz-option>
           
-           <input style="width: 40px; height: 40px;" type="image" src="{{imgMar}}"> 
-          <p >{{title}}</p>
-          <p>Content three</p>
-       
-        </nz-modal>
-
-
-
-        <div  id="mapid">    
+          <nz-option
+            nzValue="disabled"
+            nzLabel="Disabled"
+            nzDisabled
+          ></nz-option>
+        </nz-select>
+          </div>
+    
+        <div nz-col nzXs='10'  >
+          <button  nz-button  class="stylButton"   nzBlock (click)="filtreButton(selectedValue)" >Rechercher</button>
         </div>
-      </nz-content>
-      <nz-footer>
-        <p>fes-tourisme by Vyconsulting - 2020</p>
-      </nz-footer>
-    </nz-layout>
+        </div>
+      </div>
+      <!----end reglage-----   -->
+
+   </div> 
+  </nz-sider>
+
+  <nz-layout>
+    <nz-header>
+      
+        <div  nz-row nzType="flex" nzJustify="space-around" nzAlign="middle"  >
+        <nz-card 
+          *ngFor="let item of filterItems"
+          [ngClass]="{'cardClass': item.isSelected }"
+          (click)='selectEntity(item.id,item.type)'
+            nz-col [nzXs] ="{ span: 4, offset: 0 }" [nzLg]="{ span: 6 , offset: 0 } " >
+            
+          <img id="imgflit" [src]="item.image"   />
+        </nz-card>
+        </div>
+    
+    </nz-header>
+    <nz-content>
+   <!-------------modal ajout element---------------->  
+         
+  <ng-template #tplTitle >
+    <span>Ajouter Lieu</span>
+  </ng-template >
+  <ng-template  #tplContent>
+    
+    
+      
+    <form   nz-form [formGroup]="formGp">
+      <nz-form-item>
+        <nz-form-label [nzXs]="{ span: 6, offset: 1 }" >Nom</nz-form-label>
+        <nz-form-control [nzXs]="{ span: 12, offset: 1 }" nzErrorTip="Please input the location">
+          <input type="text" nz-input formControlName="nom" placeholder="Please input the location" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzXs]="{ span: 6, offset: 1 }" >Adresse</nz-form-label>
+        <nz-form-control [nzXs]="{ span: 12, offset: 1 }" nzErrorTip="Please input the adresse">
+          <input type="text" nz-input formControlName="adresse" placeholder="Please input the adresse" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzXs]="{ span: 6, offset: 1 }" >description</nz-form-label>
+        <nz-form-control [nzXs]="{ span: 12, offset: 1 }" nzErrorTip="Please input the description">
+          <input type="text" nz-input formControlName="description" placeholder="Please input the description" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzXs]="{ span: 6, offset: 1 }" >Ville</nz-form-label>
+        <nz-form-control [nzXs]="{ span: 12, offset: 1 }" nzErrorTip="Please input the city">
+          <input type="text" nz-input formControlName="ville" placeholder="Please input the city" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzXs]="{ span: 6, offset: 1 }" >Pays</nz-form-label>
+        <nz-form-control  [nzXs]="{ span: 12, offset: 1 }" nzErrorTip="Please input the country">
+          <input type="text" nz-input formControlName="pays" placeholder="Please input the Country" />
+        </nz-form-control>
+      </nz-form-item>
+
+     <nz-form-item>
+        <nz-form-label [nzXs]="{ span: 6, offset: 1 }">Type</nz-form-label>
+        <nz-form-control [nzXs]="{ span: 12, offset: 1 }" nzValidateStatus="validating" >
+          <nz-select name="select-validate" [ngModel]="'cafe'" formControlName="type">
+            <nz-option nzValue="cafe" nzLabel="cafe" ></nz-option>
+            <nz-option nzValue="hotel" nzLabel="hotel"></nz-option>
+            <nz-option nzValue="pharmacie" nzLabel="pharmacie"></nz-option>
+            <nz-option nzValue="monument" nzLabel="monument"></nz-option>
+            <nz-option nzValue="africa" nzLabel="africa"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item> 
+
+
+      <nz-form-item>
+        <nz-form-label [nzXs]="{ span: 6, offset: 1 }" >Latitude</nz-form-label>
+        <nz-form-control [nzXs]="{ span: 12, offset: 1 }" nzErrorTip="Please input correct latitude">
+          <input type="text" nz-input formControlName="latitude" placeholder="Ex: 34.4095" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  [nzXs]="{ span: 6, offset: 1 }">Longitude</nz-form-label>
+        <nz-form-control [nzXs]="{ span: 12, offset: 1 }" nzErrorTip="Please input correct longitude">
+          <input type="text" nz-input formControlName="longitude" placeholder="Ex: -0.5466" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+      <nz-form-label [nzXs]="{ span: 6, offset: 1 }" >Image</nz-form-label>
+        <nz-form-control [nzXs]="{ span: 12, offset: 1 }" nzErrorTip="problem d'upload">
+      <nz-upload  (change)="handleUpload($event)"  nzAction="https://df6c81ef.ngrok.io" [nzName]="'image'" nzListType="picture"  [(nzFileList)]="fileList" >
+        <button nz-button type="button"   ngDefaultControl  formControlName="image"  ><i nz-icon nzType="upload"></i><span>Click to Upload</span></button>
+      </nz-upload>
+    </nz-form-control>
+  </nz-form-item>
+      
+    </form>
+
+  </ng-template>
+  <ng-template #tplFooter>
+    <button nz-button nzType="primary" (click)="destroyTplModal()">
+      Close
+    </button>
+    <button nz-button nzType="primary" (click)="SentItem()">
+      Ajouter Un Lieu 
+    </button>
+  </ng-template>
+   <!-------------end modal ---------  (change)="onFileChanged($event)"--------->
+    
+
+<!----------------modal marker------------------>
+      <nz-modal [nzWidth]="250"
+        [(nzVisible)]="isVisible"
+        nzTitle="{{MarkerName}}"
+        [nzContent]="modalContent"
+        (nzOnCancel)="handleCancel()"
+        (nzOnOk)="handleOk()"
+      >
+        <input
+          style="width: 100px; height: 100px;"
+          type="image"
+          src="{{ imgMar }}"
+        />
+        <p>{{ title }}</p>
+        <p>Content three</p>
+      </nz-modal>
+<!--------------end modal markar------------------>
+      <div id="mapid"></div>
+    </nz-content>
+    <nz-footer>
+      <p>fes-tourisme by Vyconsulting - 2020</p>
+    </nz-footer>
   </nz-layout>
-  
+</nz-layout>
